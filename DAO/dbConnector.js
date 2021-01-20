@@ -26,4 +26,8 @@ module.exports = class DBConnection {
         throw new Error(e)
       }
     }
+
+    async closeConnection() {
+      this.#client.close();
+    }
 }
