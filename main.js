@@ -1,6 +1,6 @@
 const express = require("express");
 const app = express();
-const DBConnection = require('./models/dbConnector')
+const DBConnection = require('./DAO/dbConnector')
 
 const dbConnection = new DBConnection();
 

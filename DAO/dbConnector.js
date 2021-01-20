@@ -22,7 +22,6 @@ module.exports = class DBConnection {
       try {
         await this.#client.connect();
         this.#database = this.#client.db("school-report");
-        const collection = this.#database.collection("student");
       } catch(e) {
         throw new Error(e)
       }
