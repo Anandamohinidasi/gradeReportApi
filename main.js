@@ -1,11 +1,16 @@
 const express = require("express");
 const app = express();
+const DBConnection = require('./models/dbConnector')
+
+const dbConnection = new DBConnection();
 
 
 app.get('/', (req, res) => {
     res.send('works!')
   })
   
-  app.listen(process.env.PORT || 8080, () => {
-    console.log(`Example app listening`)
+  dbConnection.init().then(() => {
+    app.listen(process.env.PORT || 8080, () => {
+      console.log(`Example app listening`)
+    })
   })
