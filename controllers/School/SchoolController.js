@@ -3,10 +3,11 @@ import SchoolModel from "../../models/School/SchoolModel.js";
 export default class SchoolController {
     #schoolModel;
 
-    constructor(){
-        this.#schoolModel = new SchoolModel();
+    constructor(dbConnection) {
+        this.#schoolModel = new SchoolModel(dbConnection);
     }
+
     async searchSchools(searchString) {
-        return await this.#schoolModel.searchString(searchString)
+        return await this.#schoolModel.searchSchools(searchString)
     }
 }

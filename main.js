@@ -4,10 +4,11 @@ import SchoolController from "./controllers/School/SchoolController.js"
 
 const app = express();
 const dbConnection = new DBConnection();
+const schoolController = new SchoolController(dbConnection);
 
 
-app.get('/schools/:searchString', (req, res) => {
-    res.send('works!')
+app.get('/schools/:searchString', async (req, res) => {
+    res.send(await schoolController.searchSchools(req.params["searchString"]))
   })
   
 dbConnection.init().then(() => {
