@@ -3,3 +3,6 @@
 
 **Run the project**
 `npm start`
+
+**Run tests**
+`npm run test`
