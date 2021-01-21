@@ -15,11 +15,15 @@ app.get('/schools/:searchString', async (req, res) => {
 
 app.get('/reports/:schoolName/:schoolId', async (req, res) => {
   const {schoolName, schoolId} = req.params;
-  res.send(await reportController.getReport(schoolName, schoolId))
+  res.setHeader('Content-Type', 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
+  res.setHeader("Content-Disposition", `attachment; filename=grade_report_for_${schoolName.replace(' ', '_')}.xlsx`);
+  
+  await (await reportController.getReport(schoolName, schoolId)).write(res)
+  res.end();
 })
   
 dbConnection.init().then(() => {
   app.listen(process.env.PORT || 8080, () => {
-    console.log(`Reports api listening`)
+    console.info(`Reports api listening`)
   })
 })
