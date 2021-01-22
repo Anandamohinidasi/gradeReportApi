@@ -1,4 +1,5 @@
 import express from "express";
+import cors from "cors";
 import DBConnection from "./DAO/dbConnector.js";
 import SchoolController from "./controllers/School/SchoolController.js"
 import ReportController from "./controllers/Report/ReportController.js"
@@ -8,6 +9,7 @@ const dbConnection = new DBConnection();
 const schoolController = new SchoolController(dbConnection);
 const reportController = new ReportController(dbConnection);
 
+app.use(cors());
 
 app.get('/schools/:searchString', async (req, res) => {
     res.send(await schoolController.searchSchools(req.params["searchString"]))
